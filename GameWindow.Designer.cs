@@ -37,10 +37,9 @@
             // pbCanvas
             // 
             this.pbCanvas.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pbCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbCanvas.Location = new System.Drawing.Point(0, 0);
             this.pbCanvas.Name = "pbCanvas";
-            this.pbCanvas.Size = new System.Drawing.Size(784, 562);
+            this.pbCanvas.Size = new System.Drawing.Size(780, 560);
             this.pbCanvas.TabIndex = 0;
             this.pbCanvas.TabStop = false;
             this.pbCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.UpdateGraphics);
@@ -49,7 +48,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 562);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.pbCanvas);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

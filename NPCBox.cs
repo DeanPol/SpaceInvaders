@@ -1,28 +1,29 @@
-﻿namespace SpaceInvaders
+﻿using System.Drawing;
+
+namespace SpaceInvaders
 {
     class NPCBox : Box
     {
-        public NPCBox() : base (10,10,20,20,100,Direction.Right){}
-        public void MoveBox(int screenWidth, int screenHeight)
+        public int npcSpeed = 10; 
+        public NPCBox() : base (10,10,20,20,100,Direction.Right, Brushes.Red){}
+        public void MoveBox()
         {
-            int maxXPos = screenWidth - boxWidth;
-            int maxYPos = screenHeight;
-
-            if (XPos == maxXPos)
+            
+            if (XPos == canvasWidth - boxWidth)
             {
-                if (drop == 0)
+                if (verticalDrop == 0)
                 {
                     direction = Direction.Left;
-                    drop = boxHeight;
+                    verticalDrop = boxHeight;
                 }
                 else
                     direction = Direction.Down;
             }
             else if (XPos == 0)
-                if (drop == 0)
+                if (verticalDrop == 0)
                 {
                     direction = Direction.Right;
-                    drop = boxHeight;
+                    verticalDrop = boxHeight;
                 }
                 else
                     direction = Direction.Down;
@@ -30,14 +31,14 @@
             switch (direction)
             {
                 case Direction.Right:
-                    XPos++;
+                    XPos += npcSpeed;
                     break;
                 case Direction.Left:
-                    XPos--;
+                    XPos -= npcSpeed;
                     break;
                 case Direction.Down:
-                    YPos++;
-                    drop -= boxHeight;
+                    YPos += npcSpeed;
+                    verticalDrop -= boxHeight;
                     break;
             }
         }

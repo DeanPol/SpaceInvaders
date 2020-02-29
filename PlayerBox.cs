@@ -1,19 +1,20 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace SpaceInvaders
 {
     class PlayerBox : Box
     {
-
-       public PlayerBox() : base(30,30,20,20,0, Direction.None) { }
+        public int playerSpeed = 5;
+        public PlayerBox() : base(360,540,20,20,0, Direction.None, Brushes.Blue) { }
 
         public void MovePlayer()
         {
-            if (Input.KeyPress(Keys.Right))
-                XPos += 5;
+            if (Input.KeyPress(Keys.Right) && (XPos + playerSpeed <= canvasWidth - boxWidth))
+                XPos += playerSpeed;
 
-            else if (Input.KeyPress(Keys.Left))
-                XPos -= 5;
+            else if (Input.KeyPress(Keys.Left) && (XPos - playerSpeed >= 0))
+                XPos -= playerSpeed;
         }
 
     }

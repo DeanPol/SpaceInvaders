@@ -6,24 +6,24 @@ namespace SpaceInvaders
 {
     public partial class GameWindow : Form
     {
-        NPCBox aiBox = new NPCBox();
-        PlayerBox myBox = new PlayerBox();
-        Brush ai_Colour = Brushes.Red;
-        Brush my_boxColour = Brushes.Blue;
+        NPCBox npcBox = new NPCBox();
+        PlayerBox plrBox = new PlayerBox();
 
         public GameWindow()
         {
             InitializeComponent();
-
-            gameTimer.Interval = 10;
+            Settings settings = new Settings(pbCanvas.Size.Width, pbCanvas.Size.Height);
+            npcBox.canvasWidth = settings.maxWidth;
+            plrBox.canvasWidth = settings.maxWidth;
+            gameTimer.Interval = settings.gameSpeed;
             gameTimer.Tick += UpdateScreen;
             gameTimer.Start();
         }
 
         private void UpdateScreen(object sender, EventArgs e)
         {
-            aiBox.MoveBox(pbCanvas.Width, pbCanvas.Height);
-            myBox.MovePlayer();
+            npcBox.MoveBox();
+            plrBox.MovePlayer();
             pbCanvas.Invalidate();
         }
 
@@ -31,18 +31,15 @@ namespace SpaceInvaders
 
         private void KeyNotPressed(object sender, KeyEventArgs e) {Input.ChangeState(e.KeyCode, false);}
 
-        
 
         private void UpdateGraphics(object sender, PaintEventArgs e)
         {
             Graphics canvas = e.Graphics;
-            canvas.FillRectangle(ai_Colour, new Rectangle(aiBox.GetXPosition(),
-                                                         aiBox.GetYPosition(),
-                                                          aiBox.GetWidth(), aiBox.GetHeight()));
+            canvas.FillRectangle(npcBox.GetColour(), new Rectangle(npcBox.GetXPosition(),
+                                                         npcBox.GetYPosition(),
+                                                          npcBox.GetWidth(), npcBox.GetHeight()));
 
-            canvas.FillRectangle(my_boxColour, new Rectangle(myBox.GetXPosition(), myBox.GetYPosition(), myBox.GetWidth(), myBox.GetHeight()));
+            canvas.FillRectangle(plrBox.GetColour(), new Rectangle(plrBox.GetXPosition(), plrBox.GetYPosition(), plrBox.GetWidth(), plrBox.GetHeight()));
         }
-
-
     }
 }

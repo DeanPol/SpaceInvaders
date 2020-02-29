@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpaceInvaders
+﻿namespace SpaceInvaders
 {
     class Settings
     {
+        public int gameSpeed;
+        public int maxWidth;
+        public int maxHeight;
+
+        public Settings(int width, int height)
+        {
+            gameSpeed = 100;
+            maxWidth = width;
+            maxHeight = height;
+        }
     }
 }
