@@ -5,7 +5,7 @@ namespace SpaceInvaders
 {
     class Input
     {
-        private static Hashtable keyTable = new Hashtable();
+        private static readonly Hashtable keyTable = new Hashtable();
         public static bool KeyPress(Keys key)
         {
             if (keyTable[key] == null)
