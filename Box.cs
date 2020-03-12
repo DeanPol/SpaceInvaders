@@ -21,7 +21,6 @@ namespace SpaceInvaders
         protected Direction direction;
         protected Brush colour;
         public int canvasWidth;
-        public int canvasHeight;
 
         //Constructors
         public Box(int xpos, int ypos, int boxH, int boxW, int drop, Direction dir, Brush colour) 

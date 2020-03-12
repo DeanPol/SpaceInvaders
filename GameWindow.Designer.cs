@@ -49,7 +49,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ClientSize = new System.Drawing.Size(778, 534);
             this.Controls.Add(this.pbCanvas);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -58,6 +58,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Space Invaders";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyPressed);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Eject);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyNotPressed);
             ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).EndInit();
             this.ResumeLayout(false);

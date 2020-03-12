@@ -6,7 +6,7 @@ namespace SpaceInvaders
     class PlayerBox : Box
     {
         public int playerSpeed = 5;
-        public PlayerBox() : base(360,540,20,20,0, Direction.None, Brushes.Blue) { }
+        public PlayerBox() : base(360, 540, 20, 20, 0, Direction.None, Brushes.Blue) { }
 
         public void MovePlayer()
         {

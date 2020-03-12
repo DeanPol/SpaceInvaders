@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,14 +7,18 @@ namespace SpaceInvaders
 {
     public partial class GameWindow : Form
     {
-        NPCBox npcBox = new NPCBox();
+        List<NPCBox> invaders = new List<NPCBox>();
         PlayerBox plrBox = new PlayerBox();
 
         public GameWindow()
         {
             InitializeComponent();
             Settings settings = new Settings(pbCanvas.Size.Width, pbCanvas.Size.Height);
-            npcBox.canvasWidth = settings.maxWidth;
+            invaders.Add(new NPCBox(10, 20));
+            invaders.Add(new NPCBox(50, 20));
+            invaders.Add(new NPCBox(100, 20));
+            invaders.Add(new NPCBox(300, 20));
+            invaders[invaders.Count - 1].canvasWidth = settings.maxWidth;
             plrBox.canvasWidth = settings.maxWidth;
             gameTimer.Interval = settings.gameSpeed;
             gameTimer.Tick += UpdateScreen;
@@ -22,7 +27,7 @@ namespace SpaceInvaders
 
         private void UpdateScreen(object sender, EventArgs e)
         {
-            npcBox.MoveBox();
+            NPCBox.MoveInvaders(invaders);
             plrBox.MovePlayer();
             pbCanvas.Invalidate();
         }
@@ -35,11 +40,17 @@ namespace SpaceInvaders
         private void UpdateGraphics(object sender, PaintEventArgs e)
         {
             Graphics canvas = e.Graphics;
-            canvas.FillRectangle(npcBox.GetColour(), new Rectangle(npcBox.GetXPosition(),
-                                                         npcBox.GetYPosition(),
-                                                          npcBox.GetWidth(), npcBox.GetHeight()));
+            foreach(NPCBox npc in invaders)
+                canvas.FillRectangle(npc.GetColour(), new Rectangle(npc.GetXPosition(),
+                                     npc.GetYPosition(),npc.GetWidth(), npc.GetHeight()));
 
             canvas.FillRectangle(plrBox.GetColour(), new Rectangle(plrBox.GetXPosition(), plrBox.GetYPosition(), plrBox.GetWidth(), plrBox.GetHeight()));
+        }
+
+        private void Eject(object sender, KeyPressEventArgs e)
+        {
+            if (Input.KeyPress(Keys.Space) && invaders.Count > 0)
+                invaders.RemoveAt(invaders.Count - 1);
         }
     }
 }
