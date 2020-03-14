@@ -1,58 +1,63 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 
 namespace SpaceInvaders
 {
     class NPCBox : Box
     {
-        public int npcSpeed = 10; 
-        public NPCBox(int XPos, int YPos) : base (XPos, YPos, 20, 20, 100, Direction.Right, Brushes.Red){}
+        public NPCBox(int XPos, int YPos) : base (XPos, YPos, 20, 20, Brushes.Red){}
         public static void MoveInvaders(List<NPCBox> invaders)
         {
-            NPCBox leader = invaders[invaders.Count - 1];
-            NPCBox last = invaders[0];
-
-            if (leader.XPos == leader.canvasWidth - leader.boxWidth)
+            //if the right-most npc reaches the edge of the screen, everyone starts moving down closer to the player.
+            if (invaders[invaders.Count - 1].XPos == invaders[invaders.Count - 1].canvasWidth - invaders[invaders.Count - 1].boxWidth)
             {
-                if (leader.verticalDrop == 0)
+                if (invaders[invaders.Count - 1].verticalDrop == 0)
                 {
                     foreach (NPCBox npc in invaders)
                     {
                         npc.direction = Direction.Left;
-                        npc.verticalDrop = leader.boxHeight;
+                        npc.verticalDrop = invaders[invaders.Count - 1].boxHeight * 5;
                     }
                 }
                 else
                     foreach (NPCBox npc in invaders)
                         npc.direction = Direction.Down;
             }
-            else if (last.XPos == 0)
-                if (last.verticalDrop == 0)
+            //if the left-most npc reaches the edge, again everyone moves down.
+            else if (invaders[0].XPos == 0)
+            {
+                if (invaders[0].verticalDrop == 0)
                 {
                     foreach (NPCBox npc in invaders)
                     {
                         npc.direction = Direction.Right;
-                        npc.verticalDrop = last.boxHeight;
+                        npc.verticalDrop = invaders[0].boxHeight * 5;
                     }
                 }
                 else
                     foreach (NPCBox npc in invaders)
                         npc.direction = Direction.Down;
+            }
 
             foreach (NPCBox npc in invaders)
             {
                 switch (npc.direction)
                 {
                     case Direction.Right:
-                        npc.XPos += npc.npcSpeed;
-                        break;
+                        {
+                            npc.XPos += npc.boxWidth;
+                            break;
+                        }
                     case Direction.Left:
-                        npc.XPos -= npc.npcSpeed;
-                        break;
+                        {
+                            npc.XPos -= npc.boxWidth;
+                            break;
+                        }
                     case Direction.Down:
-                        npc.YPos += npc.npcSpeed;
-                        npc.verticalDrop -= npc.boxHeight;
+                        {
+                            npc.YPos += npc.boxWidth;
+                            npc.verticalDrop -= npc.boxHeight;
+                        }
                         break;
                 }
             }

@@ -14,10 +14,12 @@ namespace SpaceInvaders
         {
             InitializeComponent();
             Settings settings = new Settings(pbCanvas.Size.Width, pbCanvas.Size.Height);
-            invaders.Add(new NPCBox(10, 20));
-            invaders.Add(new NPCBox(50, 20));
-            invaders.Add(new NPCBox(100, 20));
-            invaders.Add(new NPCBox(300, 20));
+            //Creating npc and player instances
+            invaders.Add(new NPCBox(120, 20));
+            invaders.Add(new NPCBox(200, 20));
+            invaders.Add(new NPCBox(280, 20));
+            invaders.Add(new NPCBox(360, 20));
+            invaders.Add(new NPCBox(440, 20));
             invaders[invaders.Count - 1].canvasWidth = settings.maxWidth;
             plrBox.canvasWidth = settings.maxWidth;
             gameTimer.Interval = settings.gameSpeed;
@@ -47,6 +49,7 @@ namespace SpaceInvaders
             canvas.FillRectangle(plrBox.GetColour(), new Rectangle(plrBox.GetXPosition(), plrBox.GetYPosition(), plrBox.GetWidth(), plrBox.GetHeight()));
         }
 
+        //Function to kill the rightmost npc. Has bug.
         private void Eject(object sender, KeyPressEventArgs e)
         {
             if (Input.KeyPress(Keys.Space) && invaders.Count > 0)

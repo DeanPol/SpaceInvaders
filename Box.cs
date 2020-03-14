@@ -23,13 +23,24 @@ namespace SpaceInvaders
         public int canvasWidth;
 
         //Constructors
-        public Box(int xpos, int ypos, int boxH, int boxW, int drop, Direction dir, Brush colour) 
+        public Box(int xpos, int ypos, int boxH, int boxW, Brush colour) 
         {
             XPos = xpos;
             YPos = ypos;
             boxHeight = boxH;
             boxWidth = boxW;
-            this.verticalDrop = drop;
+            direction = Direction.Right;
+            verticalDrop = boxHeight * 5;
+            this.colour = colour;
+        }
+
+        public Box(int xpos, int ypos, int boxH, int boxW, Direction dir, Brush colour)
+        {
+            XPos = xpos;
+            YPos = ypos;
+            boxHeight = boxH;
+            boxWidth = boxW;
+            verticalDrop = 0;
             direction = dir;
             this.colour = colour;
         }
